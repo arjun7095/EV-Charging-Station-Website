@@ -1,0 +1,88 @@
+/* Dashboard background and content styling */
+.dashboard {
+    background-image: url('https://www.novacharge.net/hubfs/AdobeStock_535061669.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.5); /* Add a dark overlay for text readability */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    margin-right: 5px;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Button styling */
+  .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .user-btn {
+    background-color: #4CAF50; /* Green for User button */
+    color: white;
+  }
+  
+  .retailer-btn {
+    background-color: #2196F3; /* Blue for Retailer button */
+    color: white;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .content h1 {
+      font-size: 2rem;
+    }
+  
+    .content p {
+      font-size: 1rem;
+    }
+  
+    .buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .btn {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+  

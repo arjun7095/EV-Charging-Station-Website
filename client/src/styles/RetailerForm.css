@@ -1,0 +1,75 @@
+
+.form-container {
+    max-width: 600px     ;  /* Maximum width of the form */
+    margin: 20px auto; /* Center the form container */
+    padding: 20px;     /* Inner spacing */
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    
+}
+
+label {
+    display: block;     
+    margin-bottom: 8px; 
+    font-weight: bold;  
+    color: #333;      
+}
+
+/* Styles for form inputs */
+input[type="text"],
+input[type="number"],
+input[type="url"] {
+    width: 90%;        /* Full width */
+    padding: 10px;      /* Inner spacing */
+    margin-bottom: 15px; /* Space below inputs */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 1rem;    /* Base font size */
+    padding: 10px;
+}
+
+/* Submit button styling */
+button[type="submit"] {
+    width: 100%;        /* Full width */
+    padding: 10px;      /* Inner spacing */
+    background-color: #007BFF; /* Blue background */
+    color: #fff;        /* Text color */
+    border: none;       /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;     /* Pointer cursor on hover */
+    font-size: 1rem;    /* Base font size */
+}
+
+/* Button hover effect */
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 900px) {
+    .form-container {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    button[type="submit"] {
+        font-size: 0.9rem; /* Slightly smaller text size */
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 10px; /* Further adjust padding for very small screens */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    button[type="submit"] {
+        font-size: 0.8rem; /* Even smaller text size */
+    }
+}

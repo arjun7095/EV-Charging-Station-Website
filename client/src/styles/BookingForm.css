@@ -1,0 +1,123 @@
+body{
+    background-image: url('https://www.novacharge.net/hubfs/AdobeStock_535061669.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    height: fit-content;
+    backdrop-filter: blur(10px);
+
+}
+
+.booking-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+    max-width: 600px; /* Max width for the form */
+    margin: 0 auto; /* Center the form */
+    background-color: transparent;
+    
+    
+}
+
+h2 {
+     /* Space below the heading */
+    text-align: center; /* Center the heading text */
+    color: white; /* Heading color */
+    margin-bottom: auto;
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form fields */
+    width: 100%; /* Full width */
+}
+form{
+    background-color: transparent;
+    max-width: 600px;
+    border: none;
+}
+label {
+    display: block; /* Labels take the full width */
+     /* Space below the label */
+    color: #13d7fe; /* Label color */
+    text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #f39c12; /* Highlight border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+.submit-btn {
+    padding: 10px 15px; /* Padding for the submit button */
+    background-color: #27ae60; /* Green color for submit button */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.submit-btn:hover {
+    background-color: #219150; /* Darker shade on hover */
+}
+
+.back-btn {
+    position: absolute; /* Absolute positioning */
+    top: 20px; /* Position from the top */
+    left: 20px; /* Position from the left */
+    padding: 10px 15px; /* Padding for the button */
+    background-color: #f39c12; /* Color of the button */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition effect */
+    width: auto;
+}
+
+.back-btn:hover {
+    background-color: #e67e22; /* Darker shade on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .booking-form-container {
+        padding: 15px; /* Reduced padding on smaller screens */
+    }
+
+    h2 {
+        font-size: 24px; /* Smaller heading font size */
+    }
+
+    .form-group {
+        margin-bottom: 12px; /* Reduced space between form fields */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select {
+        font-size: 14px; /* Smaller font size */
+    }
+
+    .submit-btn,
+    .back-btn {
+        width: 100%; /* Full width for buttons on small screens */
+        margin-top: 10px; /* Space above buttons */
+    }
+}

@@ -1,0 +1,73 @@
+/* General styles for the login page */
+
+form {
+    width: 300px;
+    margin: 0 auto; /* Centers the form */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    color: white;
+    max-width: 500px;
+    height: 83vh;
+  }
+  
+  /* Header styling */
+  form h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  /* Input field styling */
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  
+  /* Input hover effect */
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+  
+  /* Button styling */
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  
+  /* Link to the register page */
+  a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  .home-btn{
+    width: auto;
+    margin: 20px ;
+  }
