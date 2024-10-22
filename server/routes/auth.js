@@ -66,26 +66,38 @@ try {
 });
 
 router.post('/register', async (req, res) => {
-  const { name, email, password,address, mobile } = req.body;
+  const { name, email, password, address, mobile, userType } = req.body;
   try {
-    const newUser = new User({ name, email, password,address, mobile}); 
+    // Check if the email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).send({ error: 'User already exists.' });
+    }
+
+    // If email does not exist, proceed with registration
+    const newUser = new User({ name, email, password, address, mobile, userType });
     await newUser.save();
     res.status(201).send({ message: 'User registered successfully!' });
-    console.log('User Added successfully');
   } catch (error) {
-    res.status(400).send({ error: 'Error registering user.' });
+    res.status(500).send({ error: 'Error registering user.' });
   }
 });
 router.post('/retailer/register', async (req, res) => {
-    const { name, email, password,address, mobile } = req.body;
-    try {
-      const newUser = new Retailer({ name, email, password,address, mobile}); 
-      await newUser.save();
-      res.status(201).send({ message: 'User registered successfully!' });
-      console.log('User Added successfully');
-    } catch (error) {
-      res.status(400).send({ error: 'Error registering user.' });
+  const { name, email, password, address, mobile, userType } = req.body;
+  try {
+    // Check if the email already exists
+    const existingUser = await Retailer.findOne({ email });
+    if (existingUser) {
+      return res.status(400).send({ error: 'Retailer already exists.' });
     }
-  });
+
+    // If email does not exist, proceed with registration
+    const newUser = new Retailer({ name, email, password, address, mobile, userType });
+    await newUser.save();
+    res.status(201).send({ message: 'Retailer registered successfully!' });
+  } catch (error) {
+    res.status(500).send({ error: 'Error registering Retailer.' });
+  }
+});
 
 module.exports = router;

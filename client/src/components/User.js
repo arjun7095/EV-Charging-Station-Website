@@ -30,7 +30,7 @@ const User = () => {
         try {
             const token = localStorage.getItem('token');
             const userEmail = localStorage.getItem('userEmail'); // Assuming email is stored during login
-            alert(userEmail)
+            
             if (!userEmail) {
                 console.error('No user email found in localStorage');
                 return;
@@ -69,6 +69,7 @@ const User = () => {
             if (response.ok) {
                 const data = await response.json();
                 setUser(data);
+                
             } else {
                 console.error('Failed to fetch user profile');
             }

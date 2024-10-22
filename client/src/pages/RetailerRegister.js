@@ -33,44 +33,53 @@ const RetailerRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Basic validation for CAPTCHA and passwords
     if (!captcha) {
       setError('Please complete the CAPTCHA.');
       return;
     }
+  
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
     }
-    // Add additional validation if needed
-
+  
     try {
+      // Sending form data to the registration API
       const response = await fetch('http://localhost:5000/api/auth/retailer/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
+  
       const data = await response.json();
-      if (data.success) {
-        setSuccess(' Registration successful!');
+  
+      // Check the response from the server
+      if (response.status === 201) {
+        // Registration success
+        setSuccess('Registration successful!');
+        setError('');  // Clear any error message
         setFormData({
           name: '',
           email: '',
           mobile: '',
           address: '',
           password: '',
-          confirmPassword: ''
-         
+          confirmPassword: '' 
         });
-        setError('');
-        navigate('/retailer/login')
-      } else {
-        setError(data.message);
-        setSuccess('');
-        navigate('/retailer/login')
+        navigate('/retailer/login');
+        alert('Registration Successfully Completed!!')
+      } else if (data.error) {
+        // Error returned from the server, e.g., 'User already exists'
+        setError(data.error);
+        setSuccess('');  // Clear success message
       }
     } catch (error) {
+      // Handle any other errors
       console.error('Error:', error);
       setError('Registration failed. Please try again.');
+      setSuccess('');
     }
   };
   const goToHome=()=>{

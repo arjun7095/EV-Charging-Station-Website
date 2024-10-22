@@ -16,13 +16,11 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
         // Check if CAPTCHA is completed
         if (!captcha) {
             setError('Please complete the CAPTCHA.');
             return;
         }
-
         try {
             const response = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
@@ -60,7 +58,7 @@ function Login() {
                 <button className='home-btn' onClick={goToHome}> Home</button>
             </div>
             {error && <div className="error-message">{error}</div>}
-            
+
             <form onSubmit={handleLogin}>
                 <h2>Login</h2>
                 <input
@@ -82,7 +80,7 @@ function Login() {
                     onChange={handleCaptchaChange}
                 />
                 <button type="submit">Login</button>
-                Don't have an account? <a href='/register'>register</a><br/>
+                Don't have an account? <a href='/register'>register</a><br />
             </form>
         </>
     );

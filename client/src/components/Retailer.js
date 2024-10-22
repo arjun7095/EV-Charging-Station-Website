@@ -35,9 +35,7 @@ const Retailer = () => {
 
             if (data.length > 0) {
                 fetchBookings(`${data[0]._id}`);
-            } else {
-                alert('No bunks found.');
-            }
+            } 
         } catch (error) {
             console.error('Error fetching bunks:', error);
         }
