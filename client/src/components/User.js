@@ -60,7 +60,7 @@ const User = () => {
                 return;
             }
 
-            const response = await fetch(`http://localhost:5000/api/users/${userId}`, {
+            const response = await fetch(`http://localhost:5000/api/users/data/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -69,7 +69,6 @@ const User = () => {
             if (response.ok) {
                 const data = await response.json();
                 setUser(data);
-                
             } else {
                 console.error('Failed to fetch user profile');
             }
@@ -109,8 +108,8 @@ const User = () => {
         setShowLogoutModal(false);
     };
 
-    const handleBookNow = (bunkId) => {
-        navigate(`/book/${bunkId}`); // Redirect to the booking form and pass bunkId
+    const handleBookNow = (bunkId, bunkName) => {
+        navigate(`/book/${bunkId}`, { state: { bunkName } }); // Redirect to the booking form and pass bunkId and bunkName
     };
 
     const cancelLogout = () => {
@@ -118,7 +117,6 @@ const User = () => {
     };
 
     const handleUpdateProfile = async () => {
-        
         try {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId'); // Retrieve userId from localStorage
@@ -136,7 +134,6 @@ const User = () => {
 
             if (response.ok) {
                 alert('Profile updated successfully');
-                // Optionally re-fetch user data or redirect
                 fetchUserDetails(); // Re-fetch updated user data
             } else {
                 alert(data.message || 'Failed to update profile');
@@ -195,7 +192,7 @@ const User = () => {
                                             </td>
                                             <td>
                                                 {bunk.availableSlots > 0 ? (
-                                                    <button onClick={() => handleBookNow(bunk._id)} className="book-btn">
+                                                    <button onClick={() => handleBookNow(bunk._id, bunk.bunkName)} className="book-btn">
                                                         Book Now
                                                     </button>
                                                 ) : (
@@ -220,6 +217,7 @@ const User = () => {
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile Number</th>
+                                    <th>Bunk Name</th>
                                     <th>Date</th>
                                     <th>Time Slot</th>
                                     <th>Status</th>
@@ -237,6 +235,7 @@ const User = () => {
                                             <td>{booking.name}</td>
                                             <td>{booking.email}</td>
                                             <td>{booking.mobileNumber}</td>
+                                            <td>{booking.bunkName}</td>
                                             <td>{booking.date}</td>
                                             <td>{booking.timeSlot}</td>
                                             <td>{booking.status}</td>

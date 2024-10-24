@@ -7,6 +7,10 @@ const BookingSchema = new mongoose.Schema({
         ref: 'Bunk', // Assuming you have a Bunk model
         required: true,
     },
+    bunkName:{
+        type:String,
+        required:true,
+    },
     name: {
         type: String,
         required: true,

@@ -5,32 +5,37 @@ import '../styles/BookingForm.css';
 const BookingForm = () => {
     const { bunkId } = useParams(); // Get the selected bunkId from the URL
     const navigate = useNavigate();
-    
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         mobileNumber: '',
         date: '',
         timeSlot: '',
-        status: 'Pending' // Default status is Pending
+        status: 'Pending',
+        
     });
 
-    const [availableSlots, setAvailableSlots] = useState([]);
+    const [bunkName, setBunkName] = useState(''); // State to hold the bunk name
 
-    // Fetch available time slots for the selected bunk (optional)
+    // Fetch bunk details to get bunkName and available time slots
     useEffect(() => {
-        const fetchAvailableSlots = async () => {
+        const fetchBunkDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/bunks/${bunkId}/timeslots`);
-                const slots = await response.json();
-                setAvailableSlots(slots); // Assuming you receive available time slots from the backend
+                const response = await fetch(`http://localhost:5000/api/users/fetch/${bunkId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const bunkDetails = await response.json();
+                setBunkName(bunkDetails.bunkName); // Assuming bunkDetails has a 'bunkName' property
             } catch (error) {
-                console.error('Error fetching time slots:', error);
+                console.error('Error fetching bunk details:', error);
             }
         };
+        
 
-        fetchAvailableSlots();
-    }, [bunkId]); // Add bunkId to the dependency array
+        fetchBunkDetails();
+    }, [bunkId]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -50,7 +55,8 @@ const BookingForm = () => {
                 },
                 body: JSON.stringify({
                     ...formData,
-                    bunkId, // Include the selected bunkId in the booking request
+                    bunkId,
+                    bunkName, // Include the selected bunkId in the booking request
                 }),
             });
 
@@ -69,67 +75,65 @@ const BookingForm = () => {
     const today = new Date().toISOString().split('T')[0];
 
     return (
-        <>
+        <div className="booking-form-container">
             <button className="back-btn" onClick={() => navigate('/user')}>Home</button>
-
-            <div className="booking-form-container">
-                <h2>Book a Slot for Bunk ID: {bunkId}</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="mobileNumber">Mobile Number</label>
-                        <input
-                            type="text"
-                            id="mobileNumber"
-                            name="mobileNumber"
-                            value={formData.mobileNumber}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="date">Date</label>
-                        <input
-                            type="date"
-                            id="date"
-                            name="date"
-                            value={formData.date}
-                            onChange={handleInputChange}
-                            min={today} // Set the minimum date to today
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="timeSlot">Time Slot</label>
-                        <select
-                            id="timeSlot"
-                            name="timeSlot"
-                            value={formData.timeSlot}
-                            onChange={handleInputChange}
-                            required
-                        >
-                            <option value="">Select Time Slot</option>
+            <h2>Book a Slot for Bunk: {bunkName}</h2> {/* Display bunkName here */}
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="mobileNumber">Mobile Number</label>
+                    <input
+                        type="text"
+                        id="mobileNumber"
+                        name="mobileNumber"
+                        value={formData.mobileNumber}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="date">Date</label>
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        value={formData.date}
+                        onChange={handleInputChange}
+                        min={today} // Set the minimum date to today
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="timeSlot">Time Slot</label>
+                    <select
+                        id="timeSlot"
+                        name="timeSlot"
+                        value={formData.timeSlot}
+                        onChange={handleInputChange}
+                        required
+                    >
+                        <option value="">Select Time Slot</option>
                             <option value="9:00AM - 10:00 AM">9:00AM - 10:00 AM</option>
                             <option value="10:00AM - 11:00AM">10:00AM - 11:00AM</option>
                             <option value="11:00AM - 12:00PM">11:00AM - 12:00PM</option>
@@ -140,17 +144,12 @@ const BookingForm = () => {
                             <option value="05:00PM - 06:00PM">05:00PM - 06:00PM</option>
                             <option value="06:00PM - 07:00PM">06:00PM - 07:00PM</option>
                             <option value="07:00PM - 08:00PM">07:00PM - 08:00PM</option>
-                            {availableSlots.map((slot, index) => (
-                                <option key={index} value={slot}>
-                                    {slot}
-                                </option>
-                            ))}
+                            
                         </select>
-                    </div>
-                    <button type="submit" className="submit-btn">Submit Booking</button>
-                </form>
-            </div>
-        </>
+                </div>
+                <button type="submit" className="submit-btn">Submit Booking</button>
+            </form>
+        </div>
     );
 };
 

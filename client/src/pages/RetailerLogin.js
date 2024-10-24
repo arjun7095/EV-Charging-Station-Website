@@ -38,7 +38,7 @@ function RetailerLogin() {
       localStorage.setItem('email', data.email);
 
       
-        alert('Login successful! Redirecting to user dashboard...');
+        alert('Login successful! Redirecting to Retailer dashboard...');
         navigate('/retailer'); // Redirect to user dashboard (adjust the path as needed)
         setSuccess('Login Successfull!!')
      

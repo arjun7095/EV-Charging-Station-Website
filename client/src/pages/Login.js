@@ -31,11 +31,12 @@ function Login() {
             });
 
             const data = await response.json();
-
             if (response.ok) {
                 // Store token and email in localStorage
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userEmail', email);
+                localStorage.setItem('userId',data.user._id );
+              
                 alert('Login successful! Redirecting to user dashboard...');
                 navigate('/user'); // Redirect to user dashboard (adjust the path as needed)
             } else {

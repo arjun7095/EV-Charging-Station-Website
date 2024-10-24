@@ -8,12 +8,13 @@ const router = express.Router();
 
 // Create a new booking
 router.post('/', async (req, res) => {
-    const { bunkId, name, email, mobileNumber, date, timeSlot } = req.body;
+    const { bunkId,bunkName, name, email, mobileNumber, date, timeSlot } = req.body;
 
     try {
         // Create a new booking
         const newBooking = new Booking({
             bunkId,
+            bunkName,
             name,
             email,
             mobileNumber,
