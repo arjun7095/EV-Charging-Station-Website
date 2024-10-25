@@ -50,7 +50,6 @@ const Retailer = () => {
             }
             const data = await response.json();
             setBookings(data);
-            setFilteredBookings(data); // Initialize filtered bookings
         } catch (error) {
             console.error('Error fetching bookings:', error);
         }
@@ -110,9 +109,12 @@ const Retailer = () => {
     };
 
     const handleLogout = () => {
+        const confirm=window.confirm("Are you sure, do you want to Logout?")
+        if(confirm){
         localStorage.removeItem('token');
         localStorage.removeItem('email');
         navigate('/');
+        }
     };
 
     const updateBookingStatus = async (bookingId, status) => {
@@ -130,18 +132,29 @@ const Retailer = () => {
     };
 
     const handleDateChange = (e) => {
-        const selected = e.target.value;
-        setSelectedDate(selected);
-
-        if (selected) {
+        const selectedDate = e.target.value;
+        const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        setSelectedDate(formattedDate);
+    
+        if (selectedDate) {
             const filtered = bookings.filter((booking) =>
-                new Date(booking.date).toLocaleDateString() === new Date(selected).toLocaleDateString()
+                new Date(booking.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }) === formattedDate
             );
             setFilteredBookings(filtered);
+
         } else {
             setFilteredBookings(bookings);
         }
     };
+    
 
     return (
         <div className="retailer-container">
